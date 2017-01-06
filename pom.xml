@@ -2,14 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chen</groupId>
-  <artifactId>SSM20161219-1</artifactId>
+  <artifactId>Exam-12757-20170106-1</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>SSM20161219-1 Maven Webapp</name>
+  <name>Exam-12757-20170106-1 Maven Webapp</name>
   <url>http://maven.apache.org</url>
  
   <build>
-    <finalName>SSM20161219-1</finalName>
+    <finalName>Exam-12757-20170106-1</finalName>
 
         <plugins>
             <plugin>
