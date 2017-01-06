@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/mvc 
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 	http://www.springframework.org/schema/aop 
@@ -18,26 +18,44 @@
 	<!--  配置自动扫描包-->
 	<context:component-scan base-package="com.chen.ssm.controller"></context:component-scan>
 	
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!-- 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix" value="/WEB-INF/pages"/>
 			<property name="suffix" value=""/>
-	</bean>
+	</bean> -->
 	<mvc:resources location="/image/" mapping="/image/**"/> 
 	<mvc:resources location="/style/" mapping="/style/**"/> 
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/" mapping="/*.html"/>
 	 <mvc:annotation-driven/> 
+	 	<mvc:view-controller path="/" view-name="/login.html"/>
+	 	
 	<mvc:interceptors>    
-    <mvc:interceptor>    
-        <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->  
-        <mvc:mapping path="/customer/**" />  
-        <mvc:mapping path="/film/**" />  
-        <mvc:mapping path="/**.html" />  
-       	
-        <bean class="com.chen.ssm.intercepter.LoginInterceptor"></bean>    
-    </mvc:interceptor>  
-    <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->  
+	    <mvc:interceptor>    
+	        <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller   -->
+	        <mvc:mapping path="/customer/**" />  
+	        <mvc:mapping path="/film/**" />  
+	        <mvc:mapping path="/**.html" />  
+	       
+	        <bean class="com.chen.ssm.intercepter.LoginInterceptor"></bean>    
+	    </mvc:interceptor>  
+   <!--  当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法   -->
 </mvc:interceptors>  
+
+<!-- <mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			json处理
+			<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->
+	
 	
 	</beans>
 	

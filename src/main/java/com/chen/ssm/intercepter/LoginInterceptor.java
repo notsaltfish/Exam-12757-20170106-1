@@ -15,10 +15,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+			request.setCharacterEncoding("UTF-8");
 			HttpSession  session = request.getSession();
 			Customer customer = (Customer)session.getAttribute("customer");
 			String path = request.getServletPath();
 			String contextPath = request.getContextPath();
+			response.setCharacterEncoding("UTF-8");
 			if(customer==null&&!path.equals("/login.html")&&!path.equals("/login")){
 				response.sendRedirect(request.getContextPath()+"/login.html");
 			}
