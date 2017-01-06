@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chen.ssm.mapper.CustomerMapper" >
+  	<resultMap type="com.chen.ssm.po.Customer" id="CustomerRM">
+  			<id property="customerId" column="customer_id"/>
+  		<result property="storeId" column="store_id"/>
+  		<result property="firstName" column="first_name"/>
+  		<result property="lastName" column="last_name"/>
+  		<result property="email" column="email"/>
+  		<result property="addressId" column="address_id"/>
+  		<result property="active" column="active"/>
+  		<result property="createDate" column="create_date"/>
+  		<result property="lastUpdate" column="last_update"/>
+  	</resultMap>
+  			<select id="selectByCustomer" parameterType="com.chen.ssm.po.Customer" resultMap="CustomerRM">
+  				select * from customer where 1=1 
+  				<if test="firstName !=null"> and first_name=#{firstName}</if>
+  				<if test="lastName !=null"> and last_name=#{lastName}</if>
+  			
+  			</select>
+  		
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chen.ssm.mapper.FilmMapper" >
+  <resultMap id="BaseResultMap" type="com.chen.ssm.po.Film" >
+    <id column="film_id" property="filmId"  />
+    <result column="title" property="title" />
+    <result column="release_year" property="releaseYear" jdbcType="DATE"/>
+    <result column="language_id" property="languageId" />
+    <result column="original_language_id" property="originalLanguageId" />
+    <result column="rental_duration" property="rentalDuration" />
+    <result column="rental_rate" property="rentalRate"  />
+    <result column="length" property="length" />
+    <result column="replacement_cost" property="replacementCost"  />
+    <result column="rating" property="rating"  />
+    <result column="special_features" property="specialFeatures"  />
+    <result column="last_update" property="lastUpdate"  />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.chen.ssm.po.Film" extends="BaseResultMap" >
+    <result column="description" property="description"  />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Short" >
+    select  * from film
+    where film_id = #{filmId,jdbcType=SMALLINT}
+  </select>
+  
+  <select id="selectByFilm" parameterType="com.chen.ssm.po.Page" resultMap="BaseResultMap">
+  		select * from film where 1=1
+  		<if test="entity.title !=null">and title like CONCAT(CONCAT('%', #{entity.title}), '%') </if>
+  		<if test="entity.description !=null"> and description like CONCAT(CONCAT('%', #{entity.description}), '%') </if>
+  	 limit #{startRow},#{pageSize}
+  </select>
+  
+  <select id="selectCount"  parameterType="com.chen.ssm.po.Film" resultType="int">
+  		select count(*) from film where 1=1
+  		<if test="title !=null "> and title like CONCAT(CONCAT('%', #{title}), '%') </if>
+  		<if test="description !=null "> and description like CONCAT(CONCAT('%', #{description}), '%') </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from film
+    where film_id = #{filmId,jdbcType=SMALLINT}
+  </delete>
+  
+  <delete id="deleteByPrimaryKeys" parameterType="int">
+   	SET FOREIGN_KEY_CHECKS = 0;
+  		delete from film where film_id in
+  		<foreach collection="array" item="o" separator="," open="(" close=")">
+  			#{o}
+  		</foreach>;	
+  		 SET FOREIGN_KEY_CHECKS = 1;
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.chen.ssm.po.Film" >
+    insert into film
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+		      <if test="languageId != null" >
+		        language_id,
+		      </if>
+      <if test="description != null" >description</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="languageId != null" >
+        #{languageId,jdbcType=TINYINT},
+      </if>   
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chen.ssm.po.Film" >
+    update film
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+
+      <if test="languageId != null" >
+        language_id = #{languageId,jdbcType=TINYINT},
+  </if>
+			
+		      <if test="description != null" >
+		        description = #{description,jdbcType=LONGVARCHAR},
+		      </if>
+    </set>
+    where film_id = #{filmId,jdbcType=SMALLINT}
+  </update>
+
+  
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chen.ssm.mapper.LanguageMapper" >
+  	<resultMap type="com.chen.ssm.po.Language" id="LanguageRM">
+  			<id property="languageId" column="language_id"/>
+  			<result property="name" column="name"/>
+  			<result property="lastUpdate" column="last_update"/>
+  	</resultMap>
+  			<select id="getAllLanguage" resultMap="LanguageRM">
+  				select * from language where 1=1 
+  			
+  			</select>
+  		
+</mapper>
