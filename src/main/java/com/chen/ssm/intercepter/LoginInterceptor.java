@@ -21,10 +21,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			String path = request.getServletPath();
 			String contextPath = request.getContextPath();
 			response.setCharacterEncoding("UTF-8");
-			if(customer==null&&!path.equals("/login.html")&&!path.equals("/login")){
+			if(customer==null&&!path.equals("/login.html")&&!path.equals("/customer/login")){
 				response.sendRedirect(request.getContextPath()+"/login.html");
+				return false;
 			}
-		return super.preHandle(request, response, handler);
+		return true;
 	}
 
 	
