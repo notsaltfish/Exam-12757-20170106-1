@@ -137,7 +137,8 @@
 				var page = $("#inputPage").val();
 				 var maxPage = $("#totalPages").text();
 				 if(page>parseInt(maxPage)||page<=0||isNaN(page)){
-					 alert("页码不正确")
+					 alert("页码不正确");
+					 $("#inputPage").val("");
 					 return ;
 				 }
 				query({
